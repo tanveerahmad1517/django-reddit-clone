@@ -18,6 +18,8 @@ def populateForum():
     stringToReturn = []
     print(len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))]))
     for i in range(len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])):
+        if (i > 25):
+            break;
         print(i)
         author = ""
         title = ""
@@ -32,12 +34,14 @@ def populateForum():
                 else:
                     content += line
                 z += 1
-            stringToReturn.append("<b>"+title+"</b>"+"<br />"+"<em>"+author+"</em>"+"<h6>")
+            stringToReturn.append("<a href=\"post/\"" + str(i) + ">")
+            stringToReturn.append("<b>"+title+"</a></b>"+"<br />"+"<em>"+author+"</em>"+"<h6>")
             if (len(content) > 252):
                 stringToReturn.append(content[:252] + "...")
             else:
                 stringToReturn.append(content)
             stringToReturn.append("</h6><hr>")
+    
     return "".join(stringToReturn)
 
 def renderPage(pagetype, ):
@@ -59,6 +63,4 @@ def loadPageTemplate(pagetype):
 def index(request):
     return HttpResponse(markdown2.markdown(renderPage("forum")))
 
-def post(request):
-    return("No")
 
