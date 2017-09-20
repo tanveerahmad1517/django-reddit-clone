@@ -34,7 +34,7 @@ def populateForum():
                 else:
                     content += line
                 z += 1
-            stringToReturn.append("<a href=\"post/\"" + str(i) + ">")
+            stringToReturn.append("<a href=\"post/?post=" + str(i) + "\">")
             stringToReturn.append("<b>"+title+"</a></b>"+"<br />"+"<em>"+author+"</em>"+"<h6>")
             if (len(content) > 252):
                 stringToReturn.append(content[:252] + "...")
@@ -44,7 +44,7 @@ def populateForum():
     
     return "".join(stringToReturn)
 
-def renderPage(pagetype, ):
+def renderPage(pagetype):
     if(pagetype == "forum"):
         array = loadPageTemplate("forum")
         for i in range(len(array)):
