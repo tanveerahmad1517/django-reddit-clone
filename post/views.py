@@ -39,11 +39,10 @@ def getComments(post):
             comment_author = ""
             comment_content = ""
             z = 0
-            ignore = False;
+            ignore = False
             for line in f:
-                if (z==0):
-                    if (line != str(post)):
-                        ignore = False;
+                if (z == 0 and int(line) != int(post)):
+                    ignore = True
                 if (z == 1 and ignore == False):
                     comment_author = line
                 if (z > 1 and ignore == False):
@@ -51,6 +50,7 @@ def getComments(post):
                 z += 1
             if (ignore==False):
                 stringToReturn.append("<h6><em>" + comment_author + "</h6></em>" + comment_content + "<hr>")
+            z = 0
     return "".join(stringToReturn)
 
 def renderPostPage(post):
@@ -66,6 +66,8 @@ def renderPostPage(post):
                 page.append(content[2])
             elif (line.find("{[Post Comments]}") != -1):
                 page.append(getComments(post))
+            elif (line.find("{[Post ID]}") != -1):
+                page.append(line.replace("{[Post ID]}",str(post)))
             else:
                 page.append(line)
     return "".join(page)

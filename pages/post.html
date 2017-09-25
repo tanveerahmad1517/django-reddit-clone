@@ -16,6 +16,15 @@
 <hr>
 {[Post Content]}
 <hr>
+<form action="/action">
+    <p>Your Name:<textarea name="author"></textarea></p>
+    <p>Your Comment:<textarea name="comment"></textarea></p>
+    <input type="hidden" name="type" value="comment">
+    <input type="hidden" name="post" value="{[Post ID]}">
+    </br>
+  <input type="submit">
+</form>
+<hr>
 {[Post Comments]}
 </body>
 </html>

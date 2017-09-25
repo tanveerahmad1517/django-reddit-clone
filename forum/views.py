@@ -10,9 +10,6 @@ import os, os.path
 
 #Create the view
 
-def renderPost():
-    return "I'll add stuff here later"
-
 def populateForum():
     DIR = 'content/'
     stringToReturn = []
@@ -42,12 +39,15 @@ def populateForum():
     
     return "".join(stringToReturn)
 
+def postButton():
+    return "<form action=\"/action\"> <p>Your Name:<textarea name=\"author\"></textarea></p><p>Your Title:<textarea name=\"title\"></textarea></p></br><p>Your Post:<textarea name=\"comment\"></textarea></p><input type=\"hidden\" name=\"type\" value=\"post\"></br><input type=\"submit\"></form>"
 def renderPage(pagetype):
     if(pagetype == "forum"):
         array = loadPageTemplate("forum")
         for i in range(len(array)):
             if (array[i].find("{[Posts]}") != -1):
-                array[i] = populateForum()
+                array[i] = postButton()
+                array.insert(i+1, populateForum())
         return "".join(array)
 
 def loadPageTemplate(pagetype):
