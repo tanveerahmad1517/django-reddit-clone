@@ -16,11 +16,9 @@ def renderPost():
 def populateForum():
     DIR = 'content/'
     stringToReturn = []
-    print(len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))]))
     for i in range(len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])):
         if (i > 25):
             break;
-        print(i)
         author = ""
         title = ""
         content = ""
@@ -48,7 +46,6 @@ def renderPage(pagetype):
     if(pagetype == "forum"):
         array = loadPageTemplate("forum")
         for i in range(len(array)):
-            print(array[i])
             if (array[i].find("{[Posts]}") != -1):
                 array[i] = populateForum()
         return "".join(array)

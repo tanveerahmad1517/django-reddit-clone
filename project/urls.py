@@ -20,5 +20,6 @@ urlpatterns = [
     url(r'^', include('forum.urls')),
     url(r'^post/', include('post.urls')),
     url(r'^forum/', include('forum.urls')),
+    url(r'^action/', include('action.urls')),
     url(r'^admin/', admin.site.urls),
 ]
