@@ -9,13 +9,13 @@ from markdown2 import *
 
 # Create your views here.
 
-def getPostContent(post):
+def getPostContent(post, request):
     contentToReturn = []
     author = ""
     title = ""
     content = ""
     z = 0
-    with open("content/" + str(post) + ".txt") as f:
+    with open("content/" + str(request.GET['sub']) + "/" + str(post) + "/content.txt") as f:
         for line in f:
             if (z == 0):
                 title = line
@@ -30,31 +30,27 @@ def getPostContent(post):
     contentToReturn.append("<hr>")
     return contentToReturn
 
-def getComments(post):
-    DIR = "comments/"
+def getComments(post, request):
+    DIR = "content/" + request.GET['sub'] + "/" + str(post) + "/comments/"
     stringToReturn = []
     comments = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
     for i in range(comments):
-        with open("comments/" + str(i) + ".txt") as f:
+        with open(DIR + str(i) + ".txt") as f:
             comment_author = ""
             comment_content = ""
             z = 0
-            ignore = False
             for line in f:
-                if (z == 0 and int(line) != int(post)):
-                    ignore = True
-                if (z == 1 and ignore == False):
+                if (z == 0):
                     comment_author = line
-                if (z > 1 and ignore == False):
-                    comment_content += line
+                else:
+                    comment_content = comment_content + line
                 z += 1
-            if (ignore==False):
-                stringToReturn.append("<h6><em>" + comment_author + "</h6></em>" + comment_content + "<hr>")
+            stringToReturn.append("<h6><em>" + comment_author + "</h6></em>" + comment_content + "<hr>")
             z = 0
     return "".join(stringToReturn)
 
-def renderPostPage(post):
-    content = getPostContent(post)
+def renderPostPage(post, request):
+    content = getPostContent(post, request)
     page = []
     with open("pages/post.html") as f:
         for line in f:
@@ -65,12 +61,14 @@ def renderPostPage(post):
             elif (line.find("{[Post Content]}") != -1):
                 page.append(content[2])
             elif (line.find("{[Post Comments]}") != -1):
-                page.append(getComments(post))
+                page.append(getComments(post, request))
             elif (line.find("{[Post ID]}") != -1):
                 page.append(line.replace("{[Post ID]}",str(post)))
+            elif (line.find("{[Post SUB]}") != -1):
+                page.append(line.replace("{[Post SUB]}",request.GET['sub']))
             else:
                 page.append(line)
     return "".join(page)
 
 def index(request):
-    return HttpResponse(renderPostPage(request.GET['post']))
+    return HttpResponse(renderPostPage(request.GET['post'], request))

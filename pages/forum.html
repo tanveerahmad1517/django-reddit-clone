@@ -3,6 +3,15 @@
 <title>{[Forum Name]}</title>
 </head>
 <body>
+<form action="/action">
+  <p>Your Name:<textarea name="author"></textarea></p>
+  <p>Your Title:<textarea name="title"></textarea></p>
+</br>
+<p>Your Post:<textarea name="comment"></textarea></p>
+<input type="hidden" name="type" value="post"></br>
+<input type="hidden" name="sub" value="{[Post SUB]}">
+<input type="submit">
+</form>
 {[Posts]}
 </body>
 </html>

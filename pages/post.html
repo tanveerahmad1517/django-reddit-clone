@@ -5,6 +5,7 @@
 </title>
 </head>
 <body>
+<a href="/forum/?sub={[Post SUB]}">Back to {[Post SUB]}</a>
 <div align="center">
 <h1>
 {[Post title]}
@@ -21,6 +22,7 @@
     <p><label>Your Comment:<input type="text" name="comment"></input></label></p>
     <input type="hidden" name="type" value="comment">
     <input type="hidden" name="post" value="{[Post ID]}">
+    <input type="hidden" name="sub" value="{[Post SUB]}">
     </br>
   <input type="submit">
 </form>
