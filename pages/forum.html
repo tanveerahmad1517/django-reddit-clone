@@ -1,17 +1,56 @@
+<!DOCTYPE html>
 <html>
+
 <head>
-<title>{[Forum Name]}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{[Forum Name]}</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css">
 </head>
+
 <body>
-<form action="/action">
-  <p>Your Name:<textarea name="author"></textarea></p>
-  <p>Your Title:<textarea name="title"></textarea></p>
-</br>
-<p>Your Post:<textarea name="comment"></textarea></p>
-<input type="hidden" name="type" value="post"></br>
-<input type="hidden" name="sub" value="{[Post SUB]}">
-<input type="submit">
-</form>
-{[Posts]}
+  <header>
+      <section class="hero">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">Submit a Post</h1>
+          </div>
+        </div>
+      </section>
+  </header>
+  <main>
+    <section class="section">
+      <div class="container">
+        <form action="/action" class="field">
+          <label class="label">Name
+            <div class="control">
+              <input class="input" type="text" placeholder="John Doe" name="author" required>
+            </div>
+          </label>
+          <label class="label">Title
+            <div class="control">
+              <input class="input" type="text" placeholder="My Awesome Webpage" name="title" required>
+            </div>
+          </label>
+          <label class="label">Text
+            <div class="control">
+              <textarea class="textarea" placeholder="An interesting comment" name="comment"></textarea>
+            </div>
+          </label>
+          <input type="hidden" name="type" value="post">
+          <input type="hidden" name="sub" value="{[Post SUB]}">
+          <div class="control">
+            <input class="button is-primary" type="submit" value="Post">
+          </div>
+        </form>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        {[Posts]}
+      </div>
+    </section>
+  </main>
 </body>
 </html>
