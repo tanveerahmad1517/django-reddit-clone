@@ -1,32 +1,57 @@
+<!DOCTYPE html>
 <html>
+
 <head>
-<title>
-{[Post title]}
-</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{[Post title]}</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css">
 </head>
+
 <body>
-<a href="/forum/?sub={[Post SUB]}">Back to {[Post SUB]}</a>
-<div align="center">
-<h1>
-{[Post title]}
-</h1>
-<h3>
-{[Post Author]}
-</h3>
-</div>
-<hr>
-{[Post Content]}
-<hr>
-<form action="/action">
-    <p><label>Your Name:<input type="text" name="author"></label></p>
-    <p><label>Your Comment:<input type="text" name="comment"></input></label></p>
-    <input type="hidden" name="type" value="comment">
-    <input type="hidden" name="post" value="{[Post ID]}">
-    <input type="hidden" name="sub" value="{[Post SUB]}">
-    </br>
-  <input type="submit">
-</form>
-<hr>
-{[Post Comments]}
+  <header>
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">{[Post title]}</h1>
+          <h2 class="subtitle">Posted by {[Post Author]} in <a href="/forum/?sub={[Post SUB]}">{[Post SUB]}</a></h2>
+        </div>
+      </div>
+    </section>
+  </header>
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="content">{[Post Content]}</div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <h2 class="subtitle">Comments</h2>
+        <form action="/action" class="field">
+          <label class="label">Name
+            <div class="control">
+              <input class="input" type="text" placeholder="John Doe" name="author" required>
+            </div>
+          </label>
+          <label class="label">Comment
+            <div class="control">
+              <textarea class="textarea" placeholder="An interesting comment" name="comment"></textarea>
+            </div>
+          </label>
+          <input type="hidden" name="type" value="comment">
+          <input type="hidden" name="post" value="{[Post ID]}">
+          <input type="hidden" name="sub" value="{[Post SUB]}">
+          <div class="control">
+            <input class="button is-primary" type="submit" value="Post Comment">
+          </div>
+        </form>
+        <div class="content">
+            {[Post Comments]}            
+        </div>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
